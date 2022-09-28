@@ -7,7 +7,9 @@
         mc:Ignorable="d"
         Title="Calculadora" Height="590" Width="390"
         FontSize="20">
-    <Grid>
+    <TabControl x:Name="mainTabControl">
+        <TabItem Name="Calculator" Visibility="Collapsed">
+            <Grid>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -59,7 +61,17 @@
         <TextBox x:Name="txtOngoing" IsReadOnly="True" TextAlignment="Right" VerticalAlignment="Top" FontSize="30" BorderThickness="0" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Foreground="#BBBBBB">0</TextBox>
 
         <!--History-->
-        <Button x:Name="btnHistory" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4">VISUALIZAR HISTÓRICO</Button>
+                <Button x:Name="btnHistory" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Click="btnHistory_Click">VISUALIZAR HISTÓRICO</Button>
 
     </Grid>
+        </TabItem>
+        <TabItem Name="History" Visibility="Collapsed">
+            <StackPanel>
+                <Button Click="btnBack_Click">VOLTAR</Button>
+                <TextBlock TextWrapping="Wrap">UTILIZAR ESSA PÁGINA PARA EXIBIÇÃO DO HISTÓRICO DE OPERAÇÕES</TextBlock>
+                <TextBlock></TextBlock>
+                <TextBlock TextWrapping="Wrap">FAZER CHAMADAS PARA BANCO DE DADOS SQLITE</TextBlock>
+            </StackPanel>
+        </TabItem>
+    </TabControl>
 </Window>

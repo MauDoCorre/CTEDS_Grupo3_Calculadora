@@ -175,5 +175,25 @@ namespace Calculadora
                 txtDisplay.Text = txtDisplay.Text.Substring(0, txtDisplay.Text.Length - 1);
             }
         }
+
+        /// <summary>
+        /// Função para ir para a tela de histórico de operações
+        /// </summary>
+        /// <param name="sender">Botão de histórico de operações</param>
+        /// <param name="e"></param>
+        private void btnHistory_Click(object sender, RoutedEventArgs e)
+        {
+            mainTabControl.SelectedIndex = 1;
+        }
+
+        /// <summary>
+        /// Função para voltar da tela de histórico de operações
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            mainTabControl.SelectedIndex = 0;
+        }
     }
 }
