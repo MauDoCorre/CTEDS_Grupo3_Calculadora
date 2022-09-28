@@ -6,5 +6,7 @@
     internal class Operation
     {
         public string FullOperation { get; set; } = string.Empty;
+
+        public string Time { get; set; } = string.Empty;
     }
 }
