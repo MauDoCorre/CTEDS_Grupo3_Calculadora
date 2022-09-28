@@ -39,20 +39,20 @@
         <Button x:Name="btn9" Grid.Row="3" Grid.Column="2" Click="btnNumber_Click" Content="9"/>
 
         <!--Maths button-->
-        <Button x:Name="btnPlus" Grid.Row="2" Grid.Column="3">+</Button>
-        <Button x:Name="btnMinus" Grid.Row="3" Grid.Column="3">-</Button>
-        <Button x:Name="btnTimes" Grid.Row="4" Grid.Column="3">*</Button>
-        <Button x:Name="btnDivided" Grid.Row="5" Grid.Column="3">/</Button>
-        <Button x:Name="btnEquals" Grid.Row="6" Grid.Column="3">=</Button>
+        <Button x:Name="btnPlus" Grid.Row="2" Grid.Column="3" Click="btnOperation_Click" Content="+"/>
+        <Button x:Name="btnMinus" Grid.Row="3" Grid.Column="3" Click="btnOperation_Click" Content="-"/>
+        <Button x:Name="btnTimes" Grid.Row="4" Grid.Column="3" Click="btnOperation_Click" Content="*"/>
+        <Button x:Name="btnDivided" Grid.Row="5" Grid.Column="3" Click="btnOperation_Click" Content="/"/>
+        <Button x:Name="btnEquals" Grid.Row="6" Grid.Column="3" Click="btnEquals_Click" Content="="/>
 
         <!--Clear buttons-->
-        <Button x:Name="btnClearEntry" Grid.Row="2" Grid.Column="0">CE</Button>
-        <Button x:Name="btnClear" Grid.Row="2" Grid.Column="1">C</Button>
-        <Button x:Name="btnBackspace" Grid.Row="2" Grid.Column="2">DEL</Button>
+        <Button x:Name="btnClearEntry" Grid.Row="2" Grid.Column="0" Content="CE"/>
+        <Button x:Name="btnClear" Grid.Row="2" Grid.Column="1" Content="C"/>
+        <Button x:Name="btnBackspace" Grid.Row="2" Grid.Column="2" Content="DEL"/>
 
         <!--Other buttons-->
-        <Button x:Name="btnPositiveNegative" Grid.Row="6" Grid.Column="0">+-</Button>
-        <Button x:Name="btnComma" Grid.Row="6" Grid.Column="2">,</Button>
+        <Button x:Name="btnPositiveNegative" Grid.Row="6" Grid.Column="0" Content="+-"/>
+        <Button x:Name="btnComma" Grid.Row="6" Grid.Column="2" Content=","/>
 
         <!--Display-->
         <TextBox x:Name="txtDisplay" IsReadOnly="True" TextAlignment="Right" VerticalAlignment="Bottom" FontSize="40" BorderThickness="0" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4">0</TextBox>
