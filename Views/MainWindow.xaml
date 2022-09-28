@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculadora"
         mc:Ignorable="d"
-        Title="Calculadora" Height="590" Width="390"
+        Title="Calculadora" Height="590" Width="390" MinHeight="545" MinWidth="250"
         FontSize="20">
     <TabControl x:Name="mainTabControl">
         <TabItem Name="Calculator" Visibility="Collapsed">
-            <Grid>
+             <Grid>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
