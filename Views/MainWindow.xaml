@@ -5,251 +5,61 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculadora"
         mc:Ignorable="d"
-        Title="Calculadora" Height="590" Width="390">
+        Title="Calculadora" Height="590" Width="390"
+        FontSize="20">
     <Grid>
-        <StackPanel Orientation="Vertical">
-            <TextBox 
-                Margin="0 5 8 5 "
-                Height="80" 
-                FontSize="40"
-                TextAlignment="Right" 
-                FontWeight="Bold" 
-                FontFamily="Agency FB"
-                
-                
-                
-                >Resultado das Operações</TextBox>
-            <StackPanel Orientation="Horizontal">
-                <Button x:Name="show"
-                Margin="5 5 0 0"
-                Height="90"
-                Width="90"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="48"
-                FontWeight="Bold" 
-                FontFamily="Agency FB"
-                Content="show" />
 
-                <Button x:Name="apaga_tudo"
-                Margin="5 5 0 0"
-                Height="90"
-                Width="90"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="48"
-                FontWeight="Bold" 
-                FontFamily="Agency FB"
-                Content="CE" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
 
-                <Button x:Name="apaga"
-                Margin="5 5 0 0"
-                Height="90"
-                Width="90"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="48"
-                FontWeight="Bold" 
-                FontFamily="Agency FB"
-                Content="C" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
 
-                <Button x:Name="divide"
-                Margin="5 5 0 0"
-                Height="90"
-                Width="90"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="48"
-                FontWeight="Bold" 
-                FontFamily="Agency FB"
-                Content="/" />
+        <!--Number buttons-->
+        <Button x:Name="btn0" Grid.Row="6" Grid.Column="1">0</Button>
+        <Button x:Name="btn1" Grid.Row="5" Grid.Column="0">1</Button>
+        <Button x:Name="btn2" Grid.Row="5" Grid.Column="1">2</Button>
+        <Button x:Name="btn3" Grid.Row="5" Grid.Column="2">3</Button>
+        <Button x:Name="btn4" Grid.Row="4" Grid.Column="0">4</Button>
+        <Button x:Name="btn5" Grid.Row="4" Grid.Column="1">5</Button>
+        <Button x:Name="btn6" Grid.Row="4" Grid.Column="2">6</Button>
+        <Button x:Name="btn7" Grid.Row="3" Grid.Column="0">7</Button>
+        <Button x:Name="btn8" Grid.Row="3" Grid.Column="1">8</Button>
+        <Button x:Name="btn9" Grid.Row="3" Grid.Column="2">9</Button>
 
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Button x:Name="_7"
-                Margin="5 5 0 0"
-                Height="90"
-                Width="90"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="48"
-                FontWeight="Bold" 
-                FontFamily="Agency FB"
-                Content="7" />
+        <!--Maths button-->
+        <Button x:Name="btnPlus" Grid.Row="2" Grid.Column="3">+</Button>
+        <Button x:Name="btnMinus" Grid.Row="3" Grid.Column="3">-</Button>
+        <Button x:Name="btnTimes" Grid.Row="4" Grid.Column="3">*</Button>
+        <Button x:Name="btnDivided" Grid.Row="5" Grid.Column="3">/</Button>
+        <Button x:Name="btnEquals" Grid.Row="6" Grid.Column="3">=</Button>
 
-                <Button x:Name="_8"
-                Margin="5 5 0 0"
-                Height="90"
-                Width="90"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="48"
-                FontWeight="Bold" 
-                FontFamily="Agency FB"
-                Content="8" />
+        <!--Clear buttons-->
+        <Button x:Name="btnClearEntry" Grid.Row="2" Grid.Column="0">CE</Button>
+        <Button x:Name="btnClear" Grid.Row="2" Grid.Column="1">C</Button>
+        <Button x:Name="btnBackspace" Grid.Row="2" Grid.Column="2">DEL</Button>
 
-                <Button x:Name="_9"
-                Margin="5 5 0 0"
-                Height="90"
-                Width="90"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="48"
-                FontWeight="Bold" 
-                FontFamily="Agency FB"
-                Content="9" />
+        <!--Other buttons-->
+        <Button x:Name="btnPositiveNegative" Grid.Row="6" Grid.Column="0">+-</Button>
+        <Button x:Name="btnComma" Grid.Row="6" Grid.Column="2">,</Button>
 
-                <Button x:Name="multiplica"
-                Margin="5 5 0 0"
-                Height="90"
-                Width="90"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="48"
-                FontWeight="Bold" 
-                FontFamily="Agency FB"
-                Content="x" />
+        <!--Display-->
+        <TextBox x:Name="txtDisplay" IsReadOnly="True" TextAlignment="Right" VerticalAlignment="Bottom" FontSize="40" BorderThickness="0" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4">0</TextBox>
+        <TextBox x:Name="txtOngoing" IsReadOnly="True" TextAlignment="Right" VerticalAlignment="Top" FontSize="30" BorderThickness="0" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Foreground="#BBBBBB">0</TextBox>
 
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Button x:Name="_4"
-                Margin="5 5 0 0"
-                Height="90"
-                Width="90"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="48"
-                FontWeight="Bold" 
-                FontFamily="Agency FB"
-                Content="4" />
+        <!--History-->
+        <Button x:Name="btnHistory" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4">VISUALIZAR HISTÓRICO</Button>
 
-                <Button x:Name="_5"
-                Margin="5 5 0 0"
-                Height="90"
-                Width="90"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="48"
-                FontWeight="Bold" 
-                FontFamily="Agency FB"
-                Content="5" />
-
-                <Button x:Name="_6"
-                Margin="5 5 0 0"
-                Height="90"
-                Width="90"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="48"
-                FontWeight="Bold" 
-                FontFamily="Agency FB"
-                Content="6" />
-
-                <Button x:Name="subtrai"
-                Margin="5 5 0 0"
-                Height="90"
-                Width="90"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="48"
-                FontWeight="Bold" 
-                FontFamily="Agency FB"
-                Content="-" />
-
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Button x:Name="_1"
-                Margin="5 5 0 0"
-                Height="90"
-                Width="90"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="48"
-                FontWeight="Bold" 
-                FontFamily="Agency FB"
-                Content="1" />
-
-                <Button x:Name="_2"
-                Margin="5 5 0 0"
-                Height="90"
-                Width="90"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="48"
-                FontWeight="Bold" 
-                FontFamily="Agency FB"
-                Content="2" />
-
-                <Button x:Name="_3"
-                Margin="5 5 0 0"
-                Height="90"
-                Width="90"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="48"
-                FontWeight="Bold" 
-                FontFamily="Agency FB"
-                Content="3" />
-
-                <Button x:Name="soma"
-                Margin="5 5 0 0"
-                Height="90"
-                Width="90"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="48"
-                FontWeight="Bold" 
-                FontFamily="Agency FB"
-                Content="+" />
-
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Button x:Name="indefinido"
-                Margin="5 5 0 0"
-                Height="90"
-                Width="90"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="48"
-                FontWeight="Bold" 
-                FontFamily="Agency FB"
-                Content="" />
-
-                <Button x:Name="_0"
-                Margin="5 5 0 0"
-                Height="90"
-                Width="90"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="48"
-                FontWeight="Bold" 
-                FontFamily="Agency FB"
-                Content="0" />
-
-                <Button x:Name="_decimal"
-                Margin="5 5 0 0"
-                Height="90"
-                Width="90"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="48"
-                FontWeight="Bold" 
-                FontFamily="Agency FB"
-                Content="," />
-
-                <Button x:Name="igual"
-                Margin="5 5 0 0"
-                Height="90"
-                Width="90"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                FontSize="48"
-                FontWeight="Bold" 
-                FontFamily="Agency FB"
-                Content="=" />
-
-            </StackPanel>
-
-        </StackPanel>
     </Grid>
 </Window>
