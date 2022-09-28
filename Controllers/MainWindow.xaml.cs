@@ -12,11 +12,17 @@ namespace Calculadora
         string string1 = "";
         string string2 = "";
         string operation = "";
+        bool commaUsed = false;
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Função responsável pelas interações com os botões numéricos
+        /// </summary>
+        /// <param name="sender">Botões de numerais</param>
+        /// <param name="e"></param>
         private void btnNumber_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
@@ -30,16 +36,24 @@ namespace Calculadora
             }
         }
 
+        /// <summary>
+        /// Função responsável pelas interações com os botões de operações
+        /// </summary>
+        /// <param name="sender">Botões de operações (+, -, *, /)</param>
+        /// <param name="e"></param>
         private void btnOperation_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
             operation = button.Content.ToString();
+
+            checkComma();
 
             if (string1 == "")
             {
                 string1 = txtDisplay.Text;
                 txtDisplay.Text = "0";
                 txtOngoing.Text = string1 + " " + operation;
+                commaUsed = false;
             }
             else
             {
@@ -47,13 +61,20 @@ namespace Calculadora
             }
         }
 
+        /// <summary>
+        /// Função responsável pela interação com o botão de igual
+        /// </summary>
+        /// <param name="sender">Botão "="</param>
+        /// <param name="e"></param>
         private void btnEquals_Click(object sender, RoutedEventArgs e)
         {
-            int number1, number2;
+            double number1, number2;
+
+            checkComma();
 
             string2 = txtDisplay.Text;
-            Int32.TryParse(string1, out number1);
-            Int32.TryParse(string2, out number2);
+            Double.TryParse(string1, out number1);
+            Double.TryParse(string2, out number2);
             txtOngoing.Text = string1 + " " + operation + " " + string2 + " =";
 
             switch (operation)
@@ -77,6 +98,11 @@ namespace Calculadora
 
         }
 
+        /// <summary>
+        /// Função responsável pelas interações com os botões de limpeza
+        /// </summary>
+        /// <param name="sender">Botões "CE", "C" e "DEL"</param>
+        /// <param name="e"></param>
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
@@ -85,6 +111,7 @@ namespace Calculadora
             {
                 case "CE":
                     txtDisplay.Text = "0";
+                    commaUsed = false;
                     break;
 
                 case "C":
@@ -93,15 +120,24 @@ namespace Calculadora
                     operation = "";
                     txtDisplay.Text = "0";
                     txtOngoing.Text = "0";
+                    commaUsed = false;
                     break;
 
                 case "DEL":
+                    if (txtDisplay.Text.Substring(txtDisplay.Text.Length - 1) == ",")
+                    {
+                        commaUsed = false;
+                    }
                     txtDisplay.Text = txtDisplay.Text.Substring(0, txtDisplay.Text.Length - 1);
                     break;
-
             }
         }
 
+        /// <summary>
+        /// Função responsável pelas interações com botões diversos
+        /// </summary>
+        /// <param name="sender">Botões diversos (+-, ",")</param>
+        /// <param name="e"></param>
         private void btnOther_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
@@ -120,8 +156,23 @@ namespace Calculadora
                     break;
 
                 case ",":
-                    // Fazer implementação com números fracionários - necessário parse com Floats
+                    if (!commaUsed)
+                    {
+                        txtDisplay.Text = txtDisplay.Text + ",";
+                        commaUsed = true;
+                    }
                     break;
+            }
+        }
+
+        /// <summary>
+        /// Função para checar existência de vírgula antes de enviar o dado para operações em andamento
+        /// </summary>
+        private void checkComma()
+        {
+            if (txtDisplay.Text.Substring(txtDisplay.Text.Length - 1) == ",")
+            {
+                txtDisplay.Text = txtDisplay.Text.Substring(0, txtDisplay.Text.Length - 1);
             }
         }
     }
