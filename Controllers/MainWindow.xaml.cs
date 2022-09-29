@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Calculadora.Models;
+using System;
 using System.Windows;
+using System.Linq;
 using System.Windows.Controls;
 
 namespace Calculadora
@@ -13,9 +15,15 @@ namespace Calculadora
         string string2 = "";
         string operation = "";
         bool commaUsed = false;
-        public MainWindow()
+        private readonly Context context;
+        Operation NewOperation = new();
+        
+
+        public MainWindow(Context context)
         {
+            this.context = context;
             InitializeComponent();
+            //GetOperations();
         }
 
         /// <summary>
@@ -95,6 +103,11 @@ namespace Calculadora
                     txtDisplay.Text = (number1 / number2).ToString();
                     break;
             }
+            NewOperation.FullOperation = string1 + " " + operation + " " + string2 + " = " + (number1 - number2).ToString();
+            NewOperation.Time = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+            context.Operations.Add(NewOperation);
+            context.SaveChanges();
+            NewOperation = new Operation();
 
         }
 
@@ -183,6 +196,7 @@ namespace Calculadora
         /// <param name="e"></param>
         private void btnHistory_Click(object sender, RoutedEventArgs e)
         {
+            GetOperations();
             mainTabControl.SelectedIndex = 1;
         }
 
@@ -194,6 +208,11 @@ namespace Calculadora
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             mainTabControl.SelectedIndex = 0;
+        }
+
+        private void GetOperations() 
+        {
+            OperationDataGrid.ItemsSource = context.Operations.ToList();
         }
     }
 }
