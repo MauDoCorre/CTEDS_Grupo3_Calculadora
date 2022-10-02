@@ -26,11 +26,13 @@ public class Context : DbContext
 		{
 			new Operation
 			{
+				Id = Guid.NewGuid(),
 				FullOperation = "5 + 5 = 10",
 				Time = "28/09/2022 21:10:06"
 			},
 			new Operation
 			{
+				Id = Guid.NewGuid(),
 				FullOperation = "5 * 8 = 40",
 				Time = "05/09/2022 05:50:06"
 			},

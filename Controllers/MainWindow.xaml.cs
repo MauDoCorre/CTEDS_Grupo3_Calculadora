@@ -16,14 +16,13 @@ namespace Calculadora
         string operation = "";
         bool commaUsed = false;
         private readonly Context context;
-        Operation NewOperation = new();
+        Operation NewOperation = new Operation();
         
 
         public MainWindow(Context context)
         {
             this.context = context;
             InitializeComponent();
-            //GetOperations();
         }
 
         /// <summary>
@@ -103,12 +102,11 @@ namespace Calculadora
                     txtDisplay.Text = (number1 / number2).ToString();
                     break;
             }
-            NewOperation.FullOperation = string1 + " " + operation + " " + string2 + " = " + (number1 - number2).ToString();
+            NewOperation.Id = Guid.NewGuid();
+            NewOperation.FullOperation = txtOngoing.Text + " " + txtDisplay.Text;
             NewOperation.Time = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
             context.Operations.Add(NewOperation);
             context.SaveChanges();
-            NewOperation = new Operation();
-
         }
 
         /// <summary>
