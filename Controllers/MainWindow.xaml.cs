@@ -17,7 +17,7 @@ namespace Calculadora
         bool commaUsed = false;
         private readonly Context context;
         Operation NewOperation = new Operation();
-        
+
 
         public MainWindow(Context context)
         {
@@ -33,7 +33,7 @@ namespace Calculadora
         private void btnNumber_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            if(txtDisplay.Text != "0")
+            if (txtDisplay.Text != "0")
             {
                 txtDisplay.Text += button.Content.ToString();
             }
@@ -156,7 +156,7 @@ namespace Calculadora
             switch (button.Content.ToString())
             {
                 case "+-":
-                    if(txtDisplay.Text.Substring(0, 1) != "-" && txtDisplay.Text != "0")
+                    if (txtDisplay.Text.Substring(0, 1) != "-" && txtDisplay.Text != "0")
                     {
                         txtDisplay.Text = "-" + txtDisplay.Text;
                     }
@@ -208,9 +208,9 @@ namespace Calculadora
             mainTabControl.SelectedIndex = 0;
         }
 
-        private void GetOperations() 
+        private void GetOperations()
         {
-            OperationDataGrid.ItemsSource = context.Operations.ToList();
+            OperationDataGrid.ItemsSource = context.Operations.OrderByDescending(x => x.Time).ToList();
         }
     }
 }
