@@ -74,13 +74,19 @@
 
                 <Button Grid.Row="0" Click="btnBack_Click">VOLTAR</Button>
                 <DataGrid Grid.Row="1" x:Name="OperationDataGrid" AutoGenerateColumns="False" IsReadOnly="True"
-                ColumnWidth="*" Margin="5" HeadersVisibility="None" GridLinesVisibility="None" BorderThickness="0"
+                Margin="5" GridLinesVisibility="None" BorderThickness="0" HeadersVisibility="Column"
                 ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
                     <DataGrid.Columns>
                         <!--<DataGridTextColumn Header="Id" Binding="{Binding Id}"/>-->
-                        <!--<DataGridTextColumn Header="Operação" Binding="{Binding FullOperation}"/>-->
-                        <DataGridTextColumn Binding="{Binding FullOperation}"/>
-                        <!--<DataGridTextColumn Header="Instante" Binding="{Binding Time}"/>-->
+                        <DataGridTextColumn Header="Operação" Binding="{Binding FullOperation}" Width="*"/>
+                        <DataGridTextColumn Header="Instante" Binding="{Binding Time}" Width="112"/>
+                        <DataGridTemplateColumn Header="Del" Width="40">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="X" Click="DeleteOperation" FontWeight="Bold" Background="#FFEA1A1A" BorderBrush="#FF060404"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
