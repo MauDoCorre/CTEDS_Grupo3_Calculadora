@@ -87,19 +87,19 @@ namespace Calculadora
             switch (operation)
             {
                 case "+":
-                    txtDisplay.Text = (number1 + number2).ToString();
+                    txtDisplay.Text = Math.Round((number1 + number2), 8).ToString();
                     break;
 
                 case "-":
-                    txtDisplay.Text = (number1 - number2).ToString();
+                    txtDisplay.Text = Math.Round((number1 - number2), 8).ToString();
                     break;
 
                 case "*":
-                    txtDisplay.Text = (number1 * number2).ToString();
+                    txtDisplay.Text = Math.Round((number1 * number2), 8).ToString();
                     break;
 
                 case "/":
-                    txtDisplay.Text = (number1 / number2).ToString();
+                    txtDisplay.Text = Math.Round((number1 / number2), 8).ToString();
                     break;
             }
             NewOperation.Id = Guid.NewGuid();
