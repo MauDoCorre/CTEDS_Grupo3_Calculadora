@@ -12,11 +12,9 @@ public class Context : DbContext
 
 	public DbSet<Operation> Operations { get; set; }
 
-
-
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
-		modelBuilder.Entity<Operation>().HasData(GetOperations()); 
+		//modelBuilder.Entity<Operation>().HasData(GetOperations()); 
 		base.OnModelCreating(modelBuilder);
 	}
 
