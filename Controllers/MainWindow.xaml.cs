@@ -91,24 +91,24 @@ namespace Calculadora
             switch (operation)
             {
                 case "+":
-                    txtDisplay.Text = (number1 + number2).ToString();
+                    txtDisplay.Text = Math.Round((number1 + number2), 8).ToString();
                     break;
 
                 case "-":
-                    txtDisplay.Text = (number1 - number2).ToString();
+                    txtDisplay.Text = Math.Round((number1 - number2), 8).ToString();
                     break;
 
                 case "*":
-                    txtDisplay.Text = (number1 * number2).ToString();
+                    txtDisplay.Text = Math.Round((number1 * number2), 8).ToString();
                     break;
 
                 case "/":
-                    txtDisplay.Text = (number1 / number2).ToString();
+                    txtDisplay.Text = Math.Round((number1 / number2), 8).ToString();
                     break;
             }
             NewOperation.Id = Guid.NewGuid();
             NewOperation.FullOperation = txtOngoing.Text + " " + txtDisplay.Text;
-            NewOperation.Time = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+            NewOperation.Time = DateTime.Now.ToString("dd/MM HH:mm");
             context.Operations.Add(NewOperation);
             context.SaveChanges();
         }
@@ -337,7 +337,14 @@ namespace Calculadora
 
             }
         }
-
-
+        
+        private void DeleteOperation(object s, RoutedEventArgs e)
+        {
+            var operationToDelete = (s as FrameworkElement).DataContext as Operation;
+            context.Operations.Remove(operationToDelete);
+            context.SaveChanges();
+            GetOperations();
+        }
+        
     }
 }
