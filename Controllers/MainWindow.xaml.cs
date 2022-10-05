@@ -104,7 +104,7 @@ namespace Calculadora
             }
             NewOperation.Id = Guid.NewGuid();
             NewOperation.FullOperation = txtOngoing.Text + " " + txtDisplay.Text;
-            NewOperation.Time = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+            NewOperation.Time = DateTime.Now.ToString("dd/MM HH:mm");
             context.Operations.Add(NewOperation);
             context.SaveChanges();
         }
@@ -211,6 +211,14 @@ namespace Calculadora
         private void GetOperations()
         {
             OperationDataGrid.ItemsSource = context.Operations.OrderByDescending(x => x.Time).ToList();
+        }
+
+        private void DeleteOperation(object s, RoutedEventArgs e)
+        {
+            var operationToDelete = (s as FrameworkElement).DataContext as Operation;
+            context.Operations.Remove(operationToDelete);
+            context.SaveChanges();
+            GetOperations();
         }
     }
 }
