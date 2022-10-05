@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Calculadora"
         mc:Ignorable="d"
         Title="Calculadora" Height="590" Width="390" MinHeight="545" MinWidth="250"
-        FontSize="20">
+        FontSize="20"
+        KeyDown="Window_KeyDown">
     <TabControl x:Name="mainTabControl">
         <TabItem Name="Calculator" Visibility="Collapsed">
             <Grid>
@@ -72,15 +73,14 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Button Grid.Row="0" Click="btnBack_Click">VOLTAR</Button>
+                <Button x:Name="btnBack" Grid.Row="0" Click="btnBack_Click">VOLTAR</Button>
                 <DataGrid Grid.Row="1" x:Name="OperationDataGrid" AutoGenerateColumns="False" IsReadOnly="True"
-                ColumnWidth="*" Margin="5" HeadersVisibility="None" GridLinesVisibility="None" BorderThickness="0"
+                ColumnWidth="*" Margin="5" HeadersVisibility="Column" GridLinesVisibility="None" BorderThickness="0"
                 ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
                     <DataGrid.Columns>
                         <!--<DataGridTextColumn Header="Id" Binding="{Binding Id}"/>-->
-                        <!--<DataGridTextColumn Header="Operação" Binding="{Binding FullOperation}"/>-->
-                        <DataGridTextColumn Binding="{Binding FullOperation}"/>
-                        <!--<DataGridTextColumn Header="Instante" Binding="{Binding Time}"/>-->
+                        <DataGridTextColumn Header="Operação" Binding="{Binding FullOperation}"/>
+                        <DataGridTextColumn Header="Instante" Binding="{Binding Time}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
