@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Calculadora.Models;
+using System;
 using System.Windows;
+using System.Linq;
 using System.Windows.Controls;
 
 namespace Calculadora
@@ -13,8 +15,13 @@ namespace Calculadora
         string string2 = "";
         string operation = "";
         bool commaUsed = false;
-        public MainWindow()
+        private readonly Context context;
+        Operation NewOperation = new Operation();
+
+
+        public MainWindow(Context context)
         {
+            this.context = context;
             InitializeComponent();
         }
 
@@ -26,7 +33,7 @@ namespace Calculadora
         private void btnNumber_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            if(txtDisplay.Text != "0")
+            if (txtDisplay.Text != "0")
             {
                 txtDisplay.Text += button.Content.ToString();
             }
@@ -95,7 +102,11 @@ namespace Calculadora
                     txtDisplay.Text = (number1 / number2).ToString();
                     break;
             }
-
+            NewOperation.Id = Guid.NewGuid();
+            NewOperation.FullOperation = txtOngoing.Text + " " + txtDisplay.Text;
+            NewOperation.Time = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+            context.Operations.Add(NewOperation);
+            context.SaveChanges();
         }
 
         /// <summary>
@@ -145,7 +156,7 @@ namespace Calculadora
             switch (button.Content.ToString())
             {
                 case "+-":
-                    if(txtDisplay.Text.Substring(0, 1) != "-" && txtDisplay.Text != "0")
+                    if (txtDisplay.Text.Substring(0, 1) != "-" && txtDisplay.Text != "0")
                     {
                         txtDisplay.Text = "-" + txtDisplay.Text;
                     }
@@ -183,6 +194,7 @@ namespace Calculadora
         /// <param name="e"></param>
         private void btnHistory_Click(object sender, RoutedEventArgs e)
         {
+            GetOperations();
             mainTabControl.SelectedIndex = 1;
         }
 
@@ -194,6 +206,11 @@ namespace Calculadora
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             mainTabControl.SelectedIndex = 0;
+        }
+
+        private void GetOperations()
+        {
+            OperationDataGrid.ItemsSource = context.Operations.OrderByDescending(x => x.Time).ToList();
         }
     }
 }
