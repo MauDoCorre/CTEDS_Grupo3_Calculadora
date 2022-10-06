@@ -209,7 +209,7 @@ namespace Calculadora
         /// <summary>
         /// Função para voltar da tela de histórico de operações
         /// </summary>
-        /// <param name="sender"></param>
+        /// <param name="sender">Botão de voltar</param>
         /// <param name="e"></param>
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
@@ -217,6 +217,9 @@ namespace Calculadora
             btnEquals.Focus();
         }
 
+        /// <summary>
+        /// Método que busca operações no banco de dados e insere na tabela
+        /// </summary>
         private void GetOperations()
         {
             OperationDataGrid.ItemsSource = context.Operations.OrderByDescending(x => x.Time).ToList();
@@ -337,7 +340,12 @@ namespace Calculadora
 
             }
         }
-        
+
+        /// <summary>
+        /// Método para apagar uma operação do banco de dados
+        /// </summary>
+        /// <param name="s">Botão de deletar operação</param>
+        /// <param name="e"></param>
         private void DeleteOperation(object s, RoutedEventArgs e)
         {
             var operationToDelete = (s as FrameworkElement).DataContext as Operation;
@@ -345,6 +353,19 @@ namespace Calculadora
             context.SaveChanges();
             GetOperations();
         }
-        
+
+        /// <summary>
+        /// Método para limpar banco de dados
+        /// </summary>
+        /// <param name="s">Botão de deletar operação</param>
+        /// <param name="e"></param>
+        private void btnClearHistory_Click(object s, RoutedEventArgs e)
+        {
+            var allOperations = context.Operations.ToList();
+            context.Operations.RemoveRange(allOperations);
+            context.SaveChanges();
+            GetOperations();
+        }
+
     }
 }
