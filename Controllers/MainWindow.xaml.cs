@@ -134,7 +134,6 @@ namespace Calculadora
 
                 equalUsed = true;
             }
-
         }
 
         /// <summary>
@@ -255,7 +254,7 @@ namespace Calculadora
         /// </summary>
         private void GetOperations()
         {
-            OperationDataGrid.ItemsSource = context.Operations.OrderByDescending(x => x.Time).ToList();
+            OperationDataGrid.ItemsSource = context.Operations.OrderByDescending(x => x.FullTime).ToList();
         }
 
         /// <summary>
