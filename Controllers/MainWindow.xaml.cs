@@ -3,6 +3,7 @@ using System;
 using System.Windows;
 using System.Linq;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Calculadora
 {
@@ -41,6 +42,7 @@ namespace Calculadora
             {
                 txtDisplay.Text = button.Content.ToString();
             }
+            btnEquals.Focus();
         }
 
         /// <summary>
@@ -66,6 +68,8 @@ namespace Calculadora
             {
                 txtOngoing.Text = string1 + " " + operation;
             }
+
+            btnEquals.Focus();
         }
 
         /// <summary>
@@ -142,6 +146,8 @@ namespace Calculadora
                     txtDisplay.Text = txtDisplay.Text.Substring(0, txtDisplay.Text.Length - 1);
                     break;
             }
+
+            btnEquals.Focus();
         }
 
         /// <summary>
@@ -174,6 +180,8 @@ namespace Calculadora
                     }
                     break;
             }
+
+            btnEquals.Focus();
         }
 
         /// <summary>
@@ -206,6 +214,7 @@ namespace Calculadora
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             mainTabControl.SelectedIndex = 0;
+            btnEquals.Focus();
         }
 
         /// <summary>
@@ -214,6 +223,122 @@ namespace Calculadora
         private void GetOperations()
         {
             OperationDataGrid.ItemsSource = context.Operations.OrderByDescending(x => x.Time).ToList();
+        }
+
+        /// <summary>
+        /// Event handler para reconhecer teclas digitadas
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            switch (e.Key)
+            {
+                //Numérico
+                case Key.D0:
+                case Key.NumPad0:
+                    btn0.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+
+                case Key.D1:
+                case Key.NumPad1:
+                    btn1.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+
+                case Key.D2:
+                case Key.NumPad2:
+                    btn2.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+
+                case Key.D3:
+                case Key.NumPad3:
+                    btn3.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+
+                case Key.D4:
+                case Key.NumPad4:
+                    btn4.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+
+                case Key.D5:
+                case Key.NumPad5:
+                    btn5.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+
+                case Key.D6:
+                case Key.NumPad6:
+                    btn6.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+
+                case Key.D7:
+                case Key.NumPad7:
+                    btn7.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+
+                case Key.D8:
+                case Key.NumPad8:
+                    btn8.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+
+                case Key.D9:
+                case Key.NumPad9:
+                    btn9.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+
+                //Operações
+
+                case Key.Add:
+                case Key.OemPlus:
+                    btnPlus.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+
+                case Key.Subtract:
+                case Key.OemMinus:
+                    btnMinus.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+
+                case Key.Divide:
+                    btnDivided.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+
+                case Key.Multiply:
+                    btnTimes.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+
+                case Key.Enter:
+                    btnEquals.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+
+                //Outros
+                case Key.Escape:
+                    btnClear.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+
+                case Key.Delete:
+                case Key.Back:
+                    btnBackspace.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+
+                case Key.OemComma:
+                case Key.OemPeriod:
+                case Key.Separator:
+                case Key.Decimal:
+                    btnComma.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+
+                case Key.H:
+                    if (mainTabControl.SelectedIndex == 0)
+                    {
+                        btnHistory.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    }
+                    else if (mainTabControl.SelectedIndex == 1)
+                    {
+                        btnBack.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    }
+                    break;
+
+            }
         }
 
         /// <summary>
@@ -241,5 +366,6 @@ namespace Calculadora
             context.SaveChanges();
             GetOperations();
         }
+
     }
 }
