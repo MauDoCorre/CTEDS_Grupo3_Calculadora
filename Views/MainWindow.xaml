@@ -70,6 +70,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
 
                 <Button Grid.Row="0" Click="btnBack_Click">VOLTAR</Button>
@@ -89,6 +90,7 @@
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
+                <Button Grid.Row="2" Click="btnClearHistory_Click">LIMPAR HISTÓRICO</Button>
             </Grid>
         </TabItem>
     </TabControl>
