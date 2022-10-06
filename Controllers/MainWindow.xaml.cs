@@ -109,6 +109,7 @@ namespace Calculadora
             NewOperation.Id = Guid.NewGuid();
             NewOperation.FullOperation = txtOngoing.Text + " " + txtDisplay.Text;
             NewOperation.Time = DateTime.Now.ToString("dd/MM HH:mm");
+            NewOperation.FullTime = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
             context.Operations.Add(NewOperation);
             context.SaveChanges();
         }
@@ -222,7 +223,7 @@ namespace Calculadora
         /// </summary>
         private void GetOperations()
         {
-            OperationDataGrid.ItemsSource = context.Operations.OrderByDescending(x => x.Time).ToList();
+            OperationDataGrid.ItemsSource = context.Operations.OrderByDescending(x => x.FullTime).ToList();
         }
 
         /// <summary>

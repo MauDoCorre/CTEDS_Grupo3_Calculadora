@@ -12,11 +12,14 @@ namespace Calculadora.Models
 
         public string Time { get; set; } = string.Empty;
 
-        public Operation(Guid id, string fullOperation, string time)
+        public string FullTime { get; set; } = string.Empty;
+
+        public Operation(Guid id, string fullOperation, string time, string fullTime)
         {
             Id = id;
             FullOperation = fullOperation;
             Time = time;
+            fullTime = fullTime;
         }
 
         public Operation() { }
