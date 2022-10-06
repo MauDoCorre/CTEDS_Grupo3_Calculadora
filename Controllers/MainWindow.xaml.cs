@@ -16,6 +16,7 @@ namespace Calculadora
         string string2 = "";
         string operation = "";
         bool commaUsed = false;
+        bool equalUsed = false;
         private readonly Context context;
         Operation NewOperation = new Operation();
 
@@ -34,6 +35,12 @@ namespace Calculadora
         private void btnNumber_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
+            if (equalUsed)
+            {
+                btnClear.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                equalUsed = false;
+            }
+
             if (txtDisplay.Text != "0")
             {
                 txtDisplay.Text += button.Content.ToString();
@@ -57,6 +64,15 @@ namespace Calculadora
 
             checkComma();
 
+            if (equalUsed)
+            {
+                string1 = txtDisplay.Text;
+                txtDisplay.Text = "0";
+                txtOngoing.Text = string1 + " " + operation;
+                commaUsed = false;
+                equalUsed = false;
+            }
+
             if (string1 == "")
             {
                 string1 = txtDisplay.Text;
@@ -79,38 +95,46 @@ namespace Calculadora
         /// <param name="e"></param>
         private void btnEquals_Click(object sender, RoutedEventArgs e)
         {
-            double number1, number2;
-
-            checkComma();
-
-            string2 = txtDisplay.Text;
-            Double.TryParse(string1, out number1);
-            Double.TryParse(string2, out number2);
-            txtOngoing.Text = string1 + " " + operation + " " + string2 + " =";
-
-            switch (operation)
+            if (!equalUsed)
             {
-                case "+":
-                    txtDisplay.Text = Math.Round((number1 + number2), 8).ToString();
-                    break;
+                double number1, number2;
 
-                case "-":
-                    txtDisplay.Text = Math.Round((number1 - number2), 8).ToString();
-                    break;
+                checkComma();
 
-                case "*":
-                    txtDisplay.Text = Math.Round((number1 * number2), 8).ToString();
-                    break;
+                string2 = txtDisplay.Text;
+                Double.TryParse(string1, out number1);
+                Double.TryParse(string2, out number2);
+                txtOngoing.Text = string1 + " " + operation + " " + string2 + " =";
 
-                case "/":
-                    txtDisplay.Text = Math.Round((number1 / number2), 8).ToString();
-                    break;
+                switch (operation)
+                {
+                    case "+":
+                        txtDisplay.Text = Math.Round((number1 + number2), 8).ToString();
+                        break;
+
+                    case "-":
+                        txtDisplay.Text = Math.Round((number1 - number2), 8).ToString();
+                        break;
+
+                    case "*":
+                        txtDisplay.Text = Math.Round((number1 * number2), 8).ToString();
+                        break;
+
+                    case "/":
+                        txtDisplay.Text = Math.Round((number1 / number2), 8).ToString();
+                        break;
+                }
+
+                // Salvar dados e enviar para o banco de dados
+                NewOperation.Id = Guid.NewGuid();
+                NewOperation.FullOperation = txtOngoing.Text + " " + txtDisplay.Text;
+                NewOperation.Time = DateTime.Now.ToString("dd/MM HH:mm");
+                context.Operations.Add(NewOperation);
+                context.SaveChanges();
+
+                equalUsed = true;
             }
-            NewOperation.Id = Guid.NewGuid();
-            NewOperation.FullOperation = txtOngoing.Text + " " + txtDisplay.Text;
-            NewOperation.Time = DateTime.Now.ToString("dd/MM HH:mm");
-            context.Operations.Add(NewOperation);
-            context.SaveChanges();
+
         }
 
         /// <summary>
@@ -127,6 +151,7 @@ namespace Calculadora
                 case "CE":
                     txtDisplay.Text = "0";
                     commaUsed = false;
+                    equalUsed = false;
                     break;
 
                 case "C":
@@ -136,14 +161,22 @@ namespace Calculadora
                     txtDisplay.Text = "0";
                     txtOngoing.Text = "0";
                     commaUsed = false;
+                    equalUsed = false;
                     break;
 
                 case "DEL":
-                    if (txtDisplay.Text.Substring(txtDisplay.Text.Length - 1) == ",")
+                    if (!equalUsed)
                     {
-                        commaUsed = false;
+                        if (txtDisplay.Text.Substring(txtDisplay.Text.Length - 1) == ",")
+                        {
+                            commaUsed = false;
+                        }
+
+                        if (txtDisplay.Text != "0")
+                        {
+                            txtDisplay.Text = txtDisplay.Text.Substring(0, txtDisplay.Text.Length - 1);
+                        }
                     }
-                    txtDisplay.Text = txtDisplay.Text.Substring(0, txtDisplay.Text.Length - 1);
                     break;
             }
 
