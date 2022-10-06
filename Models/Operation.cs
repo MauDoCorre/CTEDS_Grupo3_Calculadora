@@ -19,7 +19,7 @@ namespace Calculadora.Models
             Id = id;
             FullOperation = fullOperation;
             Time = time;
-            fullTime = fullTime;
+            FullTime = fullTime;
         }
 
         public Operation() { }
