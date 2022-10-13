@@ -80,7 +80,13 @@
                 ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
                     <DataGrid.Columns>
                         <!--<DataGridTextColumn Header="Id" Binding="{Binding Id}"/>-->
-                        <DataGridTextColumn Header="Operação" Binding="{Binding FullOperation}" Width="*"/>
+                        <DataGridTextColumn Header="Operação" Binding="{Binding FullOperation}" Width="*">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style>
+                                    <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
                         <DataGridTextColumn Header="Instante" Binding="{Binding Time}" Width="112"/>
                         <DataGridTemplateColumn Header="Del" Width="40">
                             <DataGridTemplateColumn.CellTemplate>
